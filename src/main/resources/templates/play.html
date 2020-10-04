@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>2048小游戏</title>
+
+    <link rel="icon" href="./asserts/img/p1.png" >
+    <link rel="stylesheet" href="./asserts/css/header.css">
+
+    <script src="./asserts/js/main.js"></script>
+    <script src="./asserts/js/number.js"></script>
+    <script src="./asserts/js/support.js"></script>
+    <script type="text/javascript"  th:src="@{/webjars/jquery/3.5.1/jquery.js}"></script>
+    <script type="text/javascript">
+        var phoneWidth =  parseInt(window.screen.width);
+        var phoneScale = phoneWidth/640;
+        var ua = navigator.userAgent;
+        if (/Android (d+.d+)/.test(ua)){
+            var version = parseFloat(RegExp.$1);
+            if(version>2.3){
+                document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+            } else{
+                document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+            }
+        }
+        else { document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">'); }
+    </script>
+</head>
+
+<body>
+<div id="header">
+    <h1><img src="./asserts/img/p1.png" height="200" width="200"/>2048</h1>
+    <a href="#" onclick="newgame" id="newgame">新游戏</a>
+    <a href="#" onclick="regret" id="regret">悔一步(<span id="count">0</span>)</a>
+    <p id="grade" style="font-weight: bold">得分：<span id="score" style="font-size: 2em;color: gold">0</span></p>
+    <p id='highest' style="font-weight: bold">最高纪录：<span id="max" th:text="${max_score}">0</span><img id="win" src="./asserts/img/maxscore.png"></p>
+</div>
+<div id="frame">
+    <div id="wrapper">
+        <div class="frame-cell" id="cell0-0"></div>
+        <div class="frame-cell" id="cell0-1"></div>
+        <div class="frame-cell" id="cell0-2"></div>
+        <div class="frame-cell" id="cell0-3"></div>
+        <div class="frame-cell" id="cell1-0"></div>
+        <div class="frame-cell" id="cell1-1"></div>
+        <div class="frame-cell" id="cell1-2"></div>
+        <div class="frame-cell" id="cell1-3"></div>
+        <div class="frame-cell" id="cell2-0"></div>
+        <div class="frame-cell" id="cell2-1"></div>
+        <div class="frame-cell" id="cell2-2"></div>
+        <div class="frame-cell" id="cell2-3"></div>
+        <div class="frame-cell" id="cell3-0"></div>
+        <div class="frame-cell" id="cell3-1"></div>
+        <div class="frame-cell" id="cell3-2"></div>
+        <div class="frame-cell" id="cell3-3"></div>
+    </div>
+    <div id="over">
+        <p id="end">-游戏结束咯，再接再厉-</p>
+    </div>
+</div>
+<p id="bottom">施展你的才华利用←、↑、→、↓来打破纪录吧！ You are the best!👍</p>
+
+</body>
+</html>
