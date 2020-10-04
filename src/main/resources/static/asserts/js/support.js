@@ -97,7 +97,6 @@ function upScore(score) {
     sc.textContent = score;
     let max_score = maxScore(score);
     if (max_score === score) {
-
         let audio = document.createElement("audio");
         audio.src = "./asserts/music/win.mp3";
         audio.play();
@@ -133,25 +132,20 @@ function maxScore(score) {
     let max = document.getElementById("max");
     let max_score = max.textContent;
     if (score > max_score) {
-        max_score = score;
+        max.textContent = score;
+        max_score = max.textContent;
         let win = document.getElementById("win");
         win.style.visibility = "visible";
         let audio = document.createElement("audio");
         audio.src = "./asserts/music/win.mp3";
         audio.play();
-        // if (typeof(Storage) !== "undefined") {
-        //     localStorage.setItem("maxscore", max.textContent);
-        // } else {
-        //     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-        //}
     }
     $.ajax({
         type: "POST",
         url: "/maxScore",
         data: {max_score:max_score},
-        contentType: "application/x-www-form-urlencoded",//"application/json;charset=utf-8",//不使用contentType: “application/json”则data可以是对象,使用contentType: “application/json”则data只能是json字符串
+        contentType: "application/x-www-form-urlencoded",
         success: function (data) {
-            console.log(data);
         }
     })
     return max_score;

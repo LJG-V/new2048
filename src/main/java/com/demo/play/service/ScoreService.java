@@ -4,5 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ScoreService {
-    Object getMaxScore();
+    String getMaxScore();
+
+    void setMaxScore(String  score);
 }

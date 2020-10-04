@@ -11,17 +11,21 @@ public class PlayController {
     @Resource
     private ScoreService scoreService;
 
-    @RequestMapping("/maxScore")
+    @RequestMapping("/getMaxScore")
     public Object getScore() {
         return scoreService.getMaxScore();
+    }
+    @RequestMapping("/maxScore")
+    public void setScore(@RequestParam("max_score") String max_score) {
+        scoreService.setMaxScore(max_score);
     }
     @GetMapping("/")
     public ModelAndView index() {
         ModelAndView view=new ModelAndView();
         // 设置跳转的视图 默认映射到 src/main/resources/templates/{viewName}.html
         view.setViewName("play");
-        view.addObject("title","这里是主页");
-        Object max_score=scoreService.getMaxScore();
+        String max_score=scoreService.getMaxScore();
+        scoreService.setMaxScore(max_score);
         view.addObject("max_score",max_score);
         return view;
     }
